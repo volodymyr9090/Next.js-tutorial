@@ -33,9 +33,9 @@ export async function createInvoice(formData: FormData){
         `;
     } catch (error) {
         console.error(error);
-        return {
-            message: 'Database Error: Failed to Create Invoice.',
-        };
+        // Throwing allows Next.js to surface the error during server rendering
+        // and keeps the action's return type as void / Promise<void>.
+        throw new Error('Database Error: Failed to Create Invoice.');
     }
 
     revalidatePath('/dashboard/invoices');
